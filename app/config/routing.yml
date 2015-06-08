@@ -1,3 +1,8 @@
+acme_task:
+    resource: "@AcmeTaskBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
