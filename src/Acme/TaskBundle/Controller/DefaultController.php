@@ -25,16 +25,30 @@ class DefaultController extends Controller
     {
         $task = new Task();
         $task->setTask('Write a blog post');
-        $task->setDueDate(new \DateTime('tomorrow'));
+        $task->setDueDate(new \DateTime('today'));
 
         $form = $this->createFormBuilder($task)
             ->add('task', 'text')
             ->add('dueDate', 'date')
-            ->add('save', 'submit')
+            ->add('nextStep', 'submit')
+            ->add('previousStep', 'submit', array('validation_groups' => false))
             ->getForm();
+
+
+
+        $form->handleRequest($request);
+
+        if ( $form->isValid() ) {
+            $nextAction = $form->get('saveAndAdd')->isClicked()
+                ? 'task_new'
+                : 'task_success';
+            echo "$nextAction";
+            // return $this->redirect($this->generateUrl($nextAction));
+        }
 
         return $this->render('AcmeTaskBundle:Default:new.html.twig', array(
             'form' => $form->createView(),
         ));
+
     }
 }
