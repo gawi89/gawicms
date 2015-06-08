@@ -19,7 +19,7 @@ class Task
 
     public function getDueDate()
     {
-        return $dueDate;
+        return $this->dueDate;
     }
 
     public function setDueDate(\DateTime $dueDate = null)
